@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Aguialarmas</title>
+ 	<link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="../css/aguialarma.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row" id ="cabeza">
+			<div class="col-4" id = "logo">
+				<img src="./img/aguila.png" alt="Aguialarmas LTDA.">
+			</div>
+			<div class="col-8" align="right" id = "titulo" >
+				<h2 id="nombreUsuario"></h2><h1 id="nombrePunto">Modulo ADMINISTRADOR</h1>	
+			</div>
+			<div class="col-12" id="barra">
+				<h6>LTDA</h6>
+			</div>
+		</div>
+
+		<div class="row" id="cuerpo">
+
+		</div>
+		<div class="row" id="pie">
+			<div class=" col-12 contentPie" id="divMsj">
+
+			</div>
+			<div class=" col-12 contentPie" id="divMsj1" onclick="marcarMsjLeido()">
+
+				<!-- MARQUESINA DE MENSAJES Y TIPS-->
+				<div class="marquee"> ...</div>
+
+			</div>
+		</div>
+	</div>
+
+<!--************************** PLANTILLAS * LLEVAR A ARCHIVO APARTE *********************-->
+<template id="login">
+	<div id="login">
+		<div id="login1">
+		  	<div class="form-row">
+			  	<form id="formLogin">
+				    <div class="form-group col-12">
+				      <input type="text" class="form-control inputform" id="userName" placeholder="Usuario">
+				    </div>
+				    <div class="form-group col-12">
+				      <input type="password" class="form-control inputform" id="password" placeholder="Contraseña">
+				    </div>
+				</form>    
+				<button type="button" class="btn2" id = "btnLogin" onclick="validarUsuario()">Aceptar</button>
+		  	</div>
+		</div>
+	</div>
+</template>
+<!--   ++++++++++ Plantilla pantalla inicial, despues del login, modulo Porteria ++++++++++++++ -->
+<template id="menuPal">
+	<div class="lateral" id="izq">
+		 <ul class="sidebar-menu">
+		 	 <li class="opcMenu">
+	        	<div class="btn1 text-center pt-2" onclick="limpiar('der')"><span>ADMINISTRADOR</span></div>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnAdmin" onclick="navegar('tfrmNotas')"><img src="../img/logo2.png" alt="admin"><span>Notas</span></button>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnPuntoControl" onclick="navegar('tfrmReserva')"><img src="../img/logo4.png" alt="control"><span>Reserva de Zonas Comunes</span></button>
+	        </li> 
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnEventos" onclick="navegar('tfrmEventos')"><img src="../img/logo4.png" alt="vigilante"><span>Eventos y Visitantes</span></button>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnEmpleados" onclick="navegar('tfrmEmpleados')"><img src="../img/logo1.png" alt="vigilante"><span>Empleados</span></button>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnVisitas" onclick="navegar('tfrmVisitas')"><img src="../img/logo6.png" alt="vigilante"><span>Consulta de Visitas</span></button>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnCirculares" onclick="navegar('tfrmCirculares')"><img src="../img/logo7.png" alt="vigilante"><span>Circulares</span></button>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnPQRS" onclick="navegar('tfrmPQRS')"><img src="../img/logo6.png" alt="vigilante"><span>PQRS</span></button>
+	        </li>
+	        <li class="opcMenu">
+	        	<button type="button" class="btn1" id = "btnSalir" onclick="navegar('salir')"><span>SALIR</span></button>
+	        </li>       
+	      </ul>
+	</div>
+	<div class="lateral" id = "der"></div>	
+</template>
+
+<!-- ***********************************PLANTILLA RECADOS Y NOTAS************************************ -->
+<template id="tfrmNotas">
+	<h2 class="titlemenu text-center">Recados y Notas</h2>
+	<div class="row">
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblNotas">
+			    	<col style="width:50%">
+			    	<col style="width:15%">
+			    	<col style="width:15%">
+			    	<col style="width:15%">
+			    	<col style="width:5%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Mensaje</th>
+							<th>Fecha</th>
+							<th>Destino</th>
+							<th>Estado</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn2 btnEditar" id = "btnEdit"><img src="../img/logo7.png" alt="Adelante"></button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>	
+		<div class="col-12 conBorde">
+			<form id="frmNotas">				
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Recados y Notas</h2>
+					    <div class="form-group col-12">
+						    <textarea type="textarea" class="form-control campotextarea" id="textoTip"></textarea>
+						</div>
+					</div>
+
+					<div class="col-6 col-md-3">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Destinatarios</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destTodos"><span class="titlecheck">Todos</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destVigil"><span class="titlecheck">Vigilante</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destResid"><span class="titlecheck">Residentes</span>
+						    </div>	    
+					  	</div>
+
+					    <div class="col-12">
+							<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Estado</h2>
+					    	<select class="form-control inputform" id="estado">
+
+							</select>
+					    </div>
+					</div>
+
+					<div class="col-6 col-md-3">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Torre/Apto</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destTodos"><span class="titlecheck">Torre 1</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destVigil"><span class="titlecheck">Torre 2</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destResid"><span class="titlecheck">Torre 3</span>
+						    </div>	    
+					  	</div>
+
+					</div>
+
+
+				</div>
+
+
+			</form>
+			<div class="col-6 offset-3 text-center btnfor1" id="btnfor1"> 
+			  	<button  class="btn" id="btnAdmin" onclick="modificarRegistro('frmNotas')">Modificar</button>
+			  	<button  class="btn" id="btnAdmin" onclick="crearRegistro('frmNotas')">Enviar</button>
+			</div>
+		</div>
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- ************************* PLANTILLA RESERVA DE ZONAS COMUNES ************************** -->
+<template id="tfrmReserva">
+	<h2 class="titlemenu text-center">Reserva de Zonas Comunes</h2>
+	<div class="row">
+		<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Reservas programadas</h2>
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblReservas">
+			    	<col style="width:50%">
+			    	<col style="width:15%">
+			    	<col style="width:15%">
+			    	<col style="width:15%">
+			    	<col style="width:5%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Evento - responsable</th>
+							<th>Fecha</th>
+							<th>Horario</th>
+							<th>Estado</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn2 btnEditar" id = "btnEdit"><img src="../img/logo7.png" alt="Adelante"></button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="col-12 conBorde">
+			<form id="tfrmReserva">				
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-3">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Descripción</h2>
+					    <div class="form-group col-12">
+					    	<select class="form-control inputform" id="descReserva">
+
+							</select>
+						</div>
+
+						<div class="col-12">
+							<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Descripción de la reserva</h2>
+							<textarea type="textarea" class="form-control campotextarea" id="textoDesc"></textarea>
+					    </div>
+
+					</div>
+
+					<div class="col-12 col-md-6 col-lg-3">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Vigencia</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+								<label for="fecIni">Fecha Inicio:</label>
+						    	<input type="date" class="form-control" id="fecIni">
+						    </div>	
+						    <div class="form-group check col-10">
+								<label for="fecFin">Fecha Fin:</label>
+						    	<input type="date" class="form-control" id="fecFin">
+						    </div>
+					  	</div>
+					</div>
+
+					<div class="col-12 col-md-6 col-lg-3">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Horario</h2>
+					  	<div class="form-row conBorde">
+						     <div class="form-group check col-10">
+								<label for="horDes">Desde: </label>
+						    	<input type="time" class="form-control" id="horDes">
+						    </div>	
+						    <div class="form-group check col-10">
+								<label for="horHas">Hasta: </label>
+						    	<input type="time" class="form-control" id="horHas">
+						    </div>
+					  	</div>
+
+					</div>
+					
+					<div class="col-12 col-md-6	 col-lg-3">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Responsable</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destResp1"><span class="titlecheck">Responsable 1</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destResp2"><span class="titlecheck">Responsable 2</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destResp3"><span class="titlecheck">Responsable 3</span>
+						    </div>	    
+					  	</div>
+
+					</div>
+
+
+				</div>
+
+
+			</form>
+			<div class="col-6 offset-3 text-center btnfor1" id="btnfor1"> 
+			  	<button  class="btn" onclick="guardarRegistro('frmReserva')">Guardar</button>
+			</div>
+		</div>
+			
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!--   **************************** PLANTILLA EVENTOS Y VISITANTES **************************-->
+<template id="tfrmEventos">
+	<h2 class="titlemenu text-center">Eventos y Visitantes</h2>
+	<div class="row">
+		<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Reservas confirmadas</h2>
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblEventos">
+			    	<col style="width:50%">
+			    	<col style="width:22%">
+			    	<col style="width:22%">
+			    	<col style="width:6%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Evento - Responsable</th>
+							<th>Fecha</th>
+							<th>Horario</th>
+							<th>Seleccionar</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="form-group check col-10">
+									<input type="checkbox" id="selEvento">
+								</div>		
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Visitantes</h2>
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblVisitantes">
+					<col style="width:60%">
+					<col style="width:20%">
+					<col style="width:20%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Nombre</th>
+							<th>Cédula</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn2 btnEditar" id = "btnEdit"><img src="../img/logo7.png" alt="Adelante"></button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblGuardarVisita">
+					<col style="width:60%">
+					<col style="width:20%">
+					<col style="width:20%">
+					<tbody class="tablebody">	
+						<tr>
+							<td>
+								<div class="form-group">
+									<input type="text" class="form-control" id="nomVisitante" placeholder="Ingrese el nombre del visitante">
+								</div>
+							</td>
+							<td>
+								<div class="form-group">
+									<input type="number" class="form-control" id="idVisitante" placeholder="Ingrese la cédula">
+								</div>
+							</td>
+							<td>
+								<div class="col-6 text-center btnfor1" id="btnfor1"> 
+									<button  class="btn" onclick="guardarRegistro('frmEventos')">Guardar</button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 text-right btnfor1" id="btnfor1"> 
+			<button  class="btn" onclick="cargarMasivo('frmEventos')">Cargue Masivo</button>
+		</div>	
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!--   ********************************* PLANTILLA EMPLEADOS ********************************-->
+<template id="tfrmEmpleados">
+	<h2 class="titlemenu text-center">Empleados</h2>
+	<div class="row">
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblEmpleados">
+			    	<col style="width:10%">
+			    	<col style="width:25%">
+			    	<col style="width:25%">
+					<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:10%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Documento</th>
+							<th>Nombres</th>
+							<th>Apellidos</th>
+							<th>Celular</th>
+							<th>Tipo Empleado</th>
+							<th>Estado</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn2 btnEditar" id = "btnEdit"><img src="../img/logo7.png" alt="Adelante"></button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-12 conBorde">
+			<h2 class="titlemenu text-left">Datos nuevos Empleados</h2>
+			<div class="form-row conBorde">
+				<div class="form-group col-12 col-md-6">
+					<input type="number" class="form-control" id="idEmpleado" placeholder="Documento ID">
+				</div>
+				<div class="form-group col-12 col-md-6">
+					<input type="text" class="form-control" id="eps" placeholder="EPS">
+				</div>
+				<div class="form-group col-12 col-md-6">
+					<input type="text" class="form-control" id="nombreEmpleado" placeholder="Nombres">
+				</div>
+				<div class="form-group col-12 col-md-6">
+					<input type="text" class="form-control" id="arl" placeholder="ARL">
+				</div> 
+				<div class="form-group col-12 col-md-6">
+					<input type="text" class="form-control" id="apellidoEmpleado" placeholder="Apellidos">
+				</div>
+				<div class="form-group col-12 col-md-6">
+					<select class="form-control inputform" id="tipoVigilante">
+						<option value="0">Tipo de Empleado</option>
+					</select>
+				</div>
+				<div class="form-group col-12 col-md-6">
+					<input type="tel" class="form-control" id="celular" placeholder="Celular">
+				</div>
+				<div class="form-group col-12 col-md-6">
+					<select class="form-control inputform" id="estado">
+						<option value="0">Estado</option>
+					</select>
+				</div>
+				<div class="col-4 text-center btnfor1" id="btnfor1">
+					<button class="btn" onclick="limpiarRegistro('frmEmpleados')">Limpiar</button>
+				</div>
+				<div class="col-4 text-center btnfor1" id="btnfor1">
+					<button class="btn" onclick="modificarRegistro('frmEmpleados')">Modificar</button>
+				</div>
+				<div class="col-4 text-center btnfor1" id="btnfor1">
+					<button class="btn" onclick="crearRegistro('frmEmpleados')">Crear</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- ****************************PLANTILLA CONSULTA DE VISITAS****************************** -->
+<template id="tfrmVisitas">
+	<h2 class="titlemenu text-center">Consulta de visitas</h2>
+	<div class="row">
+		<div class="col-12">
+			<form id="frmVisitas">				
+				<div class="row">
+					<div class="col-12 col-md-6">
+					    <h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Vigencia</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+								<label for="fecIni">Fecha Inicio:</label>
+						    	<input type="date" class="form-control" id="fecIni">
+						    </div>	
+						    <div class="form-group check col-10">
+								<label for="fecFin">Fecha Fin:</label>
+						    	<input type="date" class="form-control" id="fecFin">
+						    </div>
+					  	</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Torre/Apto</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+						    	<input type="checkbox" id="destTodos"><span class="titlecheck">Torre 1</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						    	<input type="checkbox" id="destVigil"><span class="titlecheck">Torre 2</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						    	<input type="checkbox" id="destResid"><span class="titlecheck">Torre 3</span>
+						    </div>	    
+					  	</div>
+					</div>
+					<div class="col-12 text-center btnfor1" id="btnfor1"> 
+						<button  class="btn" onclick="generarRegistro('frmNotas')">Generar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblConsultaVisitas">
+					<col style="width:10%">
+					<col style="width:90%">
+					<thead>
+						<tr class="tablesub">
+							<th></th>
+							<th class="text-center">Reporte de Visitas</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="col-9 text-right btnfor1" id="btnfor1"> 
+					<button  class="btn" onclick="guardarRegistro('frmNotas')">Guardar</button>
+					<button  class="btn" onclick="imprimirRegistro('frmNotas')">Imprimir</button>
+			  	</div>
+			</div>
+		</div>	
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- ************************************* CIRCULARES ************************************** -->
+<template id="tfrmCirculares">
+	<h2 class="titlemenu text-center">Circulares</h2>
+	<div class="row">
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblCirculares">
+			    	<col style="width:50%">
+			    	<col style="width:10%">
+			    	<col style="width:10%">
+			    	<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:10%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Mensaje</th>
+							<th>Fecha Ini</th>
+							<th>Fecha Fin</th>
+							<th>Destino</th>
+							<th>Estado</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn2 btnEditar" id = "btnEdit"><img src="../img/logo7.png" alt="Adelante"></button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>	
+		<div class="col-12">
+			<form id="frmCirculares">				
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Establecimiento</h2>
+					  	<div class="form-row conBorde">
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destTodos"><span class="titlecheck">Todos</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destVigil"><span class="titlecheck">Vigilante</span>
+						    </div>	
+						    <div class="form-group check col-10">
+						      <input type="checkbox" id	= "destResid"><span class="titlecheck">Residentes</span>
+						    </div>	    
+					  	</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Texto de la Circular</h2>
+					    <div class="form-group col-12">
+						    <textarea type="textarea" class="form-control campotextarea" id="textoCircular"></textarea>
+						</div>
+					</div>
+				</div>
+
+			</form>
+			<div class="col-6 offset-6 text-right btnfor1" id="btnfor1"> 
+			  	<button  class="btn" onclick="crearRegistro('frmCirculares')">Enviar</button>
+			</div>
+		</div>
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- *********************************** PLANTILLA PQRS ************************************ -->
+<template id="tfrmPQRS">
+	<h2 class="titlemenu text-center">PQRS</h2>
+	<div class="row">
+		<div class="col-12">
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-bordered letraTabla" id="tblPQRS">
+			    	<col style="width:10%">
+			    	<col style="width:40%">
+			    	<col style="width:10%">
+			    	<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:10%">
+					<col style="width:10%">
+					
+					<thead>
+						<tr class="tablesub">
+							<th>Tipo</th>
+							<th>Descripción</th>
+							<th>Fecha</th>
+							<th>Fecha Respuesta</th>
+							<th>Originado por</th>
+							<th>Estado</th>
+							<th>Responder</th>
+						</tr>
+					</thead>
+					<tbody class="tablebody">	
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn2 btnEditar" id = "btnEdit"><img src="../img/logo7.png" alt="Adelante"></button>
+								</div>	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-12 conBorde">
+			<form id="frmNotas">				
+				<div class="row">
+					<div class="col-12">
+						<h2 class="titleform1 ml-2 mb-1 mt-3" align="left">Respuesta a PQRS</h2>
+					    <div class="form-group col-12">
+						    <textarea type="textarea" class="form-control campotextarea" id="respPQRS"></textarea>
+						</div>
+					</div>
+				</div>
+
+
+			</form>
+			<div class="col-12 text-center btnfor1" id="btnfor1"> 
+			  	<button  class="btn" onclick="crearRegistro('frmNotas')">Enviar</button>
+			</div>
+		</div>
+	</div>
+</template>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<script src= "../lib/js/jquery3.3.1.js"></script>
+<script src= "../lib/js/jquery-ui.js"></script>
+<script src= "../lib/js/bootstrap.min.js"></script>
+
+<script src='../lib/js/jquery.marquee.min.js'></script>
+
+<script src= "js/vistaAdmin.js"></script>
+<script src= "js/modeloAdmin.js"></script>
+<script src= "js/controlAdmin.js"></script>
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+</body>
+</html>

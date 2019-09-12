@@ -1,0 +1,559 @@
+/* Definicion de colores ***********************************/
+:root{
+	--blanco: 		#FFFFFF;
+	--rojo: 		#FF2626; 	/* rojo */
+	--amarillo: 	#FFF200; 	/* amarillo claro */
+	--amarilloOsc: 	#FFC90E; 	/* amarillo oscuro */
+	--grisCla: 		#F0F0F0; 	/* gris Claro*/
+	--gris: 		#BBBBBB; 	/* gris */
+	--negro: 		#000000; 	
+	--verde: 		#28A745;
+	--naranja: 		#FFC107;
+}
+
+/**** LOGIN*************************************************/
+#login{
+	height: 300px;
+	width: 400px;
+	background-color: var(--amarillo);
+	margin: auto;
+}
+
+#login1{
+	height: 170px;
+	width: 250px;
+	background-color: var(--blanco);
+	margin: 65px 75px;
+	padding: 20px;
+}
+
+#login1>.form-row>.form-group{
+	border: solid 1px red;
+}
+
+#login1>.form-row>.form-group>input{
+	border: none;
+}
+
+.conBorde, .conBorde1{
+	border: var(--gris) solid 1px;
+}
+
+.conBorde1{
+	margin:  20px 0px 0px 16px;
+	padding: 0px 20px 20px 10px;
+}
+
+.btn{
+	width: 160px;
+}
+
+#btnLogin{
+/*	border: solid 1px red; */
+	width: 100px;
+	background-color: var(--amarillo);
+	float: right;
+	margin: 0 0 0 100px;
+
+}
+#btnLogin:hover{
+	background-color: var(--amarilloOsc);	
+}
+
+/* Contenedor principal******************************/
+.container{
+	/*height: 99vh;*/	/*Comentado el 29-08-2019*/
+	background-color: var(--blanco);
+	max-width: 95%;    
+	padding: 0;	
+	overflow: hidden;
+}
+
+#cabeza{  	/*cambiado*/
+/*	height: 15vh;*/
+	background-color: var(--blanco);
+/*	border-bottom: var(--rojo) solid 8px;*/
+	padding-left: 10px;
+    margin: 0;
+} 
+
+#cuerpo{
+	/*height: 70vh;*/ /*Comentado el 29-08-2019*/
+	background-color: var(--blanco);
+/*	padding-left: 15px;*/
+    margin: 0;
+}
+
+
+
+#cuerpo2{
+	/*height: 75vh;*/ /*Comentado el 29-08-2019*/
+	background-color: var(--blanco);
+	padding-left: 15px;
+    margin: 0 0 5px 0;
+    border-bottom: 35px solid var(--amarillo);
+}
+
+#pie{
+	height: 10vh;
+	border-top: var(--rojo) solid 6px;
+	margin: 0;
+}
+
+/* cabeza **********************************************/
+#logo{  /*cambiado*/
+	background-image: url("/aguialarmas/img/aguila.png");
+	margin-top: 5px;
+    background-repeat: no-repeat;
+    height: 80px;		
+}
+
+#titulo{
+	color: var(--negro);
+	text-align: right;
+	vertical-align: middle;
+}
+
+/* cambios MLM*/
+#titulo>h1{
+	font-size: 2em;
+	float: right;
+	padding: 25px 5px 0px 5px;
+}
+
+#titulo>h2{
+	font-size: 1.3em;
+	float: right;
+	padding:37px 5px 0px 5px;
+
+}
+
+#barra{
+	background-color: var(--rojo);
+	height: 15px;
+	width: 100vw;
+	color: var(--blanco);
+}
+
+#barra>h6{
+	font-size: 0.8em;
+	margin-left: 230px;
+	padding: 0;
+}
+/* cuerpo *************************************************/
+.lateral{
+/*	padding: 0;*/
+	/*height: 70vh;*/ /*Comentado el 29-08-2019*/
+	overflow-y: auto;
+}
+
+#der{	
+/*	overflow-y: auto;*/
+}
+.sidebar-menu {
+    padding: 0;
+ 	font-size: 0.9em;
+}
+
+.sidebar-menu li {
+    display: inline;
+}
+
+.btn1 img {
+    float: left;
+    margin-left: 10px;
+}
+
+.btn1{
+	display: inline-block;
+  margin-top: 5px;
+  background-color: var(--amarillo);
+  overflow: hidden;
+  border: 0;
+`/*	max-width: 90%;
+  min-width: 90%;*/
+  width: 100%;
+  height: 40px;
+}
+/*AGREGADO MLM*/
+.btn1:hover{
+    background-color: var(--amarilloOsc);
+    cursor: pointer;	
+}
+
+
+.btn2{
+	display: inline-block;
+	margin-right: 5px;
+	padding: 0;
+	background-color: transparent;
+	overflow: hidden;
+	border: 0;
+}
+
+.btn3 {
+    width: 89%;
+}
+
+.btnEditar{
+	width: 25px;
+}
+
+.table {
+/*    width: 89%; */
+    float: left;
+   /* margin-top: 25px;*/
+    overflow: auto;
+    max-height: 180px;
+}
+
+.btn-group-vertical {
+	margin-left: 15px;
+
+}
+.tablesub{
+	background-color: var(--gris);
+}
+
+.form1{
+	max-width: 38%;
+	border: var(--gris) solid 1px;
+	margin: 30px 0px;	/*MLM*/
+}
+.form2{
+	width: 100%;		
+	border: var(--gris) solid 1px;
+	margin: 5px 10px;	/*MLM*/
+}
+.form3{
+	width: 90%;
+	border: var(--gris) solid 1px;
+	margin-top: 25px;
+}
+.form4 {
+    width: 100%;
+    border: var(--gris) solid 1px;
+    min-height: 180px;
+    max-height: 310px;
+	margin: 5px 10px;	/*MLM*/    
+}
+
+.titleform1{
+	font-size: 14px;
+    margin: 3% 0 5% 0;
+}
+
+.form-row {
+    margin: auto;
+}
+.form-group.col-6 {
+    padding: 3px 6px;
+    margin: initial;
+}
+.form-group.col-11 {
+    padding: 3px 6px;
+    margin: initial;
+}
+
+.btnfor1 button {
+    margin: 2px 10px;
+    background-color: #92a8d1;
+}
+
+.btnfor2 .btn{
+    line-height: 0.8;
+}
+
+.btnfor3 {
+    display: grid;
+/*    margin: 10px 0;*/
+}
+
+.btnfor5 {
+    margin-top: 64%;
+    display: grid;
+}
+
+#divCargar{
+	padding: 20px 20px;
+}
+
+input[type="file"] {
+    background-color: var(--gris);
+    height: 38px;
+    padding: 4px 0px;
+/*    -webkit-appearance: inner-spin-button;
+    width: 100px; */
+}
+
+.inputform{
+	height: calc(1.9rem + 2px);
+}
+
+.inputform2{
+	height: calc(1.9rem + 2px);
+	margin-left: 10px;
+}
+
+.inputform3 {
+    height: calc(1.9rem + 2px);
+    margin-left: 10px;
+    background-color: var(--grisCla);
+}
+
+.selectform{
+	height: calc(1.9rem + 2px);
+	border-radius: 0;
+}
+
+.selecttable {
+    width: 89%;
+    border: 1px solid var(--gris);
+}
+
+.check{
+	margin-bottom: 3px;
+}
+
+.checktable{
+	float: right;
+}
+
+.checkvalidar {
+    border: 4px solid var(--rojo);
+    height: 50px;
+}
+
+.titlecheck{
+	font-size: 13px;
+    margin-left: 10px;
+}
+
+.tablebody{
+/*	line-height: 5px;*/
+}
+
+.table-bordered td {
+    padding: 0.55rem;
+}
+
+.campotextarea {
+    min-height: 83px;
+}
+
+.tdtable1{
+	line-height: 5px;
+	border: 0;
+	border-top: 0 !important;
+}
+.tablebody2{
+	border: 1px solid var(--gris);
+	line-height: 5px;
+}
+
+.table-responsive{
+	display: grid;
+}
+
+tr.tablesub td {
+    padding: 0 0 0 8px;
+}
+
+.titlemenu {
+    font-size: 18px;
+}
+
+.titletable {
+    font-size: 16px;
+    margin: 0;
+    width: 100%; /*MLM 89%*/
+    background-color: var(--gris);
+    display: table;
+}
+
+.titletable2 {
+    width: 89%;
+    background-color: var(--gris);
+    display: table;
+    height: 19px;
+}
+
+/* Marcar Bordes para separar areas*/
+.cuadro{
+	border-top: 5px solid var(--amarilloOsc);
+	margin-top: 15px;
+	padding-top: 15px;
+}
+
+.bloque1{   /* para separar bloques tipo col-12*/
+	margin: 10px 10px;
+
+}
+
+
+#cajaPuntosTip{
+	height: 150px;
+	overflow-y: auto;
+}
+
+.miniSelect{
+	width: 70px;
+	height: 25px;
+    font-size: 0.8em;
+	display: inline-block;
+	float: left;
+	padding: 2px 10px;
+}
+
+/* pie *************************************************/
+
+.contentPie {
+	width: 100%;
+    margin-top: 3px;
+	background-color: var(--amarillo);
+	color: var(--negro);
+}
+
+
+/**********************************************/
+.form-control:focus {
+/*    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+ */    box-shadow: none; 
+}
+
+.info{
+	height: 153px;
+}
+
+
+
+/*Botones del modulo operador - opcion administradores*/
+.btnOperAdmin{
+	width: 135px;
+}
+
+/* Tamaño de letra en las tablas*/
+.letraTabla{
+	font-size: 12px;
+}
+/*------------------- ESTILOS MODULO PORTERIA -------------------------------------*/
+/*Cuadro lateral izquierdo. muestra visitas actuales*/
+#visitas{
+	width: 100;
+	padding: 0;
+	margin: 0;
+}
+
+.tablaVisitas{
+	max-height: 30vh;
+	overflow-y: auto;
+	background-color: #F5F5F5;
+	font-size: 12px;
+	padding: 0;
+}
+
+#tblDetalleVisitas{
+	height: 70vh;
+}
+
+#listaVisitas td{
+	padding: 1px 3px;
+}
+
+/*fotografia */
+#imgVisitante{
+	height: 160px;
+	width: 110px;
+}
+
+/*contiene botones que se ocultan*/
+#btnOculto{
+	display: none;
+}
+
+#numFicha{
+	width: 160px;
+}
+
+/* Botones en modulo porteria, ingreso*/
+#btnIngresar, #btnCancelar{
+	width: 160px;
+	margin: 5px 10px;
+	height: 35px;
+}
+
+#btnIngresar{
+	background-color: var(--verde);
+}
+#btnCancelar{
+	background-color: var(--naranja);
+}
+
+#observaciones{
+	width: 100%;
+}
+/*--- FORMATO VENTANA MODAL TOMA FOTOS -------------------*/
+
+#results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#results > div {
+    width:50%;
+    text-align: center;
+    line-height: 24px;
+}
+
+video {
+  border: 2px solid rgba(255, 255, 255, 1);
+  background: #263238; 
+  height: 198px; 
+  width: 50%;
+}
+
+canvas {
+  border: 2px solid rgba(255, 255, 255, 1);
+  background: #263238; 
+}
+
+button, a{
+  width: 150px;
+  height: 30px;
+  background-color: pink;
+}
+
+/*----------MARQUESINA --------------------------------*/
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+/*  background: #ccc;*/
+}
+
+/* Boton ventana modal para filtrar residentes*/
+#btnAsignarResidente{
+  width: 50px;	
+  background-color: var(--grisCla);
+}
+
+/*******************************************************
+AGREGADO POR: JETB 21/08/2019
+*******************************************************/
+#izq, #der{
+	width: 100%;
+}
+
+.opcMenu{
+	width: 10%;
+}
+/*------------------------------------------------------*/
+@media screen and (min-width: 600px){
+	#izq{width: 20%;}
+	#der{width: 79%;}
+	.opcMenu{width: 100%;}	
+}
